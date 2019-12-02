@@ -1,6 +1,6 @@
 def app_name = 'gamefication'
 def app_funtion = 'backend'
-
+def compose_file = 'mongo-compose.yaml'
 
 stage 'Checkout'
 
@@ -16,6 +16,6 @@ node {
 
 stage 'Deploying to DEV server'
 node {
-    sh "docker-compose up -d "
+  sh "docker-compose -f ${compose_file} up -d "
   }
 
