@@ -1,6 +1,9 @@
 def app_name = 'gamefication'
 def app_funtion = 'backend'
 
+def getGitBranchName() {
+    return scm.branches[0].name
+}
 stage 'Checkout'
 
 node {
@@ -10,10 +13,10 @@ node {
 stage 'Build Image'
 node {
    sh "docker build . -t ${app_name}/${app_funtion}"
-   sh ' echo $env.BRANCH_NAME'
+
 }
 
-if ($env.BRANCH_NAME == 'master') {
+if (${getGitBranchName} == 'master') {
   stage 'Deploying to DEV server'
   node {
     sh "docker-compose up -d "
