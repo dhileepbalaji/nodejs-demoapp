@@ -1,5 +1,6 @@
 def app_name = 'gamefication'
 def app_funtion = 'backend'
+def branch = getGitBranchName()
 
 def getGitBranchName() {
     return scm.branches[0].name
@@ -14,6 +15,7 @@ node {
 stage 'Build Image'
 node {
    sh "docker build . -t ${app_name}/${app_funtion}"
+    sh " echo ${branch}"
 
 }
 
