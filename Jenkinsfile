@@ -13,7 +13,7 @@ node {
    sh ' echo $env.BRANCH_NAME'
 }
 
-if ($env.BRANCH_NAME" == 'master') {
+if ($env.BRANCH_NAME == 'master') {
   stage 'Deploying to DEV server'
   node {
     sh "docker-compose up -d "
