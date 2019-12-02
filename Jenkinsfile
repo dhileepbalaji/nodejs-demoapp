@@ -4,6 +4,7 @@ def app_funtion = 'backend'
 def getGitBranchName() {
     return scm.branches[0].name
 }
+
 stage 'Checkout'
 
 node {
@@ -16,7 +17,7 @@ node {
 
 }
 
-if (${getGitBranchName} == 'master') {
+if ( getGitBranchName == 'master') {
   stage 'Deploying to DEV server'
   node {
     sh "docker-compose up -d "
