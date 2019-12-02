@@ -11,7 +11,6 @@ node {
 stage 'Build Image'
 node {
    sh "docker build . -t ${app_name}/${app_funtion}"
-    sh " echo ${branch}"
 
 }
 
