@@ -10,7 +10,7 @@ node {
 stage 'Build Image'
 node {
    sh "docker build . -t ${app_name}/${app_funtion}"
-   sh ' echo '"${BRANCH_NAME}"'
+   sh ' echo "${BRANCH_NAME}"'
 }
 
 if ("${BRANCH_NAME}" == 'master') {
