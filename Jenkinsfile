@@ -10,10 +10,10 @@ node {
 stage 'Build Image'
 node {
    sh "docker build . -t ${app_name}/${app_funtion}"
-   sh ' echo "${BRANCH_NAME}"'
+   sh ' echo $env.BRANCH_NAME'
 }
 
-if ("${BRANCH_NAME}" == 'master') {
+if ($env.BRANCH_NAME" == 'master') {
   stage 'Deploying to DEV server'
   node {
     sh "docker-compose up -d "
