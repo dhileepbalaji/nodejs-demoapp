@@ -12,7 +12,7 @@ stage 'Clean WorkSpace'
 
 stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
-      final scmVars = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/chennaitricolor/civicsense_students_be']]])
+      final scmVars = checkout(scm)
       env.TAG = "${scmVars.GIT_COMMIT}"
       echo "scmVars: ${TAG}"
 
