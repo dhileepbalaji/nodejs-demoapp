@@ -5,12 +5,8 @@ def app_funtion = 'backend'
 def dev_compose_file = 'mongo-compose.yaml'
 def prod_compose_file = 'docker-compose-prod.yaml'
 
-stage 'Checkout Source Code'
-// Start Agent 
 node {
-stage('Checkout code') {
- steps {
-    script {
+stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
       def scmVars = checkout([
         $class: 'GitSCM',
@@ -24,9 +20,7 @@ stage('Checkout code') {
       env.GIT_COMMIT = scmVars.GIT_COMMIT
       echo "env.GIT_COMMIT"
       echo "${env.GIT_COMMIT}"
-    }
-  }
-}
+
 stage 'Build Image'
 
    sh "docker build . -t ${app_name}/${app_funtion}"
