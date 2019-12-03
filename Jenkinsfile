@@ -14,7 +14,6 @@ stage('Checkout code') {
       // Checkout the repository and save the resulting metadata
       def scmVars = checkout([
         $class: 'GitSCM',
-        ...
       ])
 
       // Display the variable using scmVars
@@ -26,9 +25,6 @@ stage('Checkout code') {
       echo "env.GIT_COMMIT"
       echo "${env.GIT_COMMIT}"
     }
-
-    // Here the metadata is available as environment variable
-    ...
   }
 }
 stage 'Build Image'
