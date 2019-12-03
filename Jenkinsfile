@@ -2,10 +2,11 @@ def userInput = true
 def didTimeout = false
 def app_name = 'gamefication'
 def app_funtion = 'backend'
-def dev_compose_file = 'mongo-compose.yaml'
+def dev_compose_file = 'docker-compose-dev.yaml'
 def prod_compose_file = 'docker-compose-prod.yaml'
 
 node {
+      
 stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
       final scmVars = checkout(scm)
@@ -14,13 +15,13 @@ stage 'Checkout code'
 
 
 stage 'Build Image'
-
-   sh "docker build . -t ${app_name}/${app_funtion}"
+      
+      sh "docker build . -t ${app_name}/${app_funtion}"
 
 stage 'dev'
-  
-  sh "printenv | sort"
-  sh "docker-compose -f ${dev_compose_file} up -d "
+      
+      env.RELEASE_ENVIRONMENT = "dev"
+      sh "docker-compose -f ${dev_compose_file} up -d "
 }
 
 // Kill Agent
@@ -32,7 +33,7 @@ timeout(time: 15, unit: "MINUTES") {
 // Start Agent Again
 node {
 stage 'prod'
-
-  sh "docker-compose -f ${prod_compose_file} up -d "
+      env.RELEASE_ENVIRONMENT = "dev"
+      sh "docker-compose -f ${prod_compose_file} up -d "
   
 }
