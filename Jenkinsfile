@@ -6,7 +6,10 @@ def dev_compose_file = 'docker-compose-dev.yaml'
 def prod_compose_file = 'docker-compose-prod.yaml'
 
 node {
-      
+
+stage 'Clean WorkSpace'
+       cleanWs()
+
 stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
       final scmVars = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/chennaitricolor/civicsense_students_be']]])
