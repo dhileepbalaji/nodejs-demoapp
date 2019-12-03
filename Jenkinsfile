@@ -8,8 +8,29 @@ def prod_compose_file = 'docker-compose-prod.yaml'
 stage 'Checkout Source Code'
 // Start Agent 
 node {
-  checkout scm
+stage('Checkout code') {
+ steps {
+    script {
+      // Checkout the repository and save the resulting metadata
+      def scmVars = checkout([
+        $class: 'GitSCM',
+        ...
+      ])
 
+      // Display the variable using scmVars
+      echo "scmVars.GIT_COMMIT"
+      echo "${scmVars.GIT_COMMIT}"
+
+      // Displaying the variables saving it as environment variable
+      env.GIT_COMMIT = scmVars.GIT_COMMIT
+      echo "env.GIT_COMMIT"
+      echo "${env.GIT_COMMIT}"
+    }
+
+    // Here the metadata is available as environment variable
+    ...
+  }
+}
 stage 'Build Image'
 
    sh "docker build . -t ${app_name}/${app_funtion}"
