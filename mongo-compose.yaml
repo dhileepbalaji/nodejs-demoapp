@@ -2,12 +2,32 @@ version: '3.7'
 services:
   mongodb:
     image: mongo:latest
-    container_name: "MongoDB" 
+    container_name: mongodb
+    expose:
+      - 27017
+      - 27018
+      - 27019
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "test"
-      MONGO_INITDB_ROOT_PASSWORD: "test@123"      
-      MONGO_INITDB_DATABASE: "test"
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     ports:
       - "27017:27019:27017:27019"
     volumes:
       - /opt/mongodb:/data/db
+    networks:
+      default:
+  
+  civicsense_students_be:
+    image: ${APP_NAME}/${APP_TYPE}
+    networks:
+      default:
+  redis:
+    image: redis
+    container_name: redis
+    expose:
+      - 6379
+
+
+networks:
+  default:
