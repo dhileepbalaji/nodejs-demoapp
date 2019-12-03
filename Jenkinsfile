@@ -16,7 +16,7 @@ stage 'Build Image'
 
 stage 'dev'
   
-  sh "echo Deploying to ${env.STAGE_NAME}"
+  sh "printenv | sort"
   sh "docker-compose -f ${dev_compose_file} up -d "
 }
 
