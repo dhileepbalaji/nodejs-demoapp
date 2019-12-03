@@ -9,7 +9,7 @@ node {
 stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
       final scmVars = checkout(scm)
-      def TAG = ${scmVars.GIT_COMMIT}
+      def TAG = "${scmVars.GIT_COMMIT}"
       echo "scmVars: ${TAG}"
 
 
