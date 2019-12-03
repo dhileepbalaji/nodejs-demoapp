@@ -8,10 +8,10 @@ def prod_compose_file = 'docker-compose-prod.yaml'
 node {
 stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
-final scmVars = checkout(scm)
-echo "scmVars: ${scmVars}"
-echo "scmVars.GIT_COMMIT: ${scmVars.GIT_COMMIT}"
-echo "scmVars.GIT_BRANCH: ${scmVars.GIT_BRANCH}"
+      final scmVars = checkout(scm)
+      def TAG: = ${scmVars.GIT_COMMIT}
+      echo "scmVars: ${TAG}"
+
 
 stage 'Build Image'
 
