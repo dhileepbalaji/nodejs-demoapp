@@ -26,6 +26,7 @@ stage 'dev'
       
       env.RELEASE_ENVIRONMENT = "dev"
       env.STAGE_NAME = "dev"
+      sh "docker-compose -f ${dev_compose_file} down "
       sh "docker-compose -f ${dev_compose_file} up -d "
 }
 
