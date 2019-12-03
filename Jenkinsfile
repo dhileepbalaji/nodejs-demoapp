@@ -1,7 +1,5 @@
 def userInput = true
 def didTimeout = false
-def app_name = 'gamefication'
-def app_funtion = 'backend'
 def dev_compose_file = 'docker-compose-dev.yaml'
 def prod_compose_file = 'docker-compose-prod.yaml'
 
@@ -19,7 +17,7 @@ stage 'Checkout code'
 
 stage 'Build Image'
       
-      sh "docker build . -t ${app_name}/${app_funtion}:${TAG}"
+      sh "docker build . -t ${APP_NAME}/${APP_TYPE}:${TAG}"
 
 stage 'dev'
       
