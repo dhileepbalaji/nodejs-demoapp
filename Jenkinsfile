@@ -7,7 +7,10 @@ node {
 
 stage 'Clean WorkSpace'
        cleanWs()
-
+       
+stage 'Clean Exited Containers'
+       sh "docker container prune --force"
+       
 stage 'Checkout code'
       // Checkout the repository and save the resulting metadata
       final scmVars = checkout(scm)
@@ -23,7 +26,6 @@ stage 'dev'
       
       env.RELEASE_ENVIRONMENT = "dev"
       env.STAGE_NAME = "dev"
-      sh "docker-compose -f ${dev_compose_file} down "
       sh "docker-compose -f ${dev_compose_file} up -d "
 }
 
